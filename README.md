@@ -1,7 +1,4 @@
-# README.md
-
-## TODO
-1) Implement
+## Implement
+- Adding habits
 - Editing existing habits
 - Confirm dialogue for removing habits
-- Redo habit state system (Individual states for each habit)
