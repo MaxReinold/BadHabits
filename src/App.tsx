@@ -15,9 +15,9 @@ const testData = {
     7,14,30,60,90,120,150
   ],
   "habits":[
-    {"key":1,"name":"Waking up late", "duration": 1, "nextMilestone": 7, "description":"No description provided."},
-    {"key":2,"name":"Skipping class", "duration": 5, "nextMilestone": 7, "description":"No description provided."},
-    {"key":3,"name":"Wasting Time", "duration": 3, "nextMilestone": 7, "description":null},
+    {"key":1,"name":"Waking up late", "duration": 1, "nextMilestone": 7, "description":""},
+    {"key":2,"name":"Skipping class", "duration": 5, "nextMilestone": 7, "description":""},
+    {"key":3,"name":"Wasting Time", "duration": 3, "nextMilestone": 7, "description":""},
   ]
 }
 
@@ -112,7 +112,7 @@ function App() {
                   setNewHabitError(true);
                 }
               }}>Create</Button>
-              <Badge className={(newHabitError?"":"hidden")} variant="destructive">Name must not be empty or taken.</Badge>
+              {(newHabitError?<Badge variant="destructive">Name must not be empty or taken.</Badge>:"")}
             </div>
           </DrawerContent>
         </Drawer>
