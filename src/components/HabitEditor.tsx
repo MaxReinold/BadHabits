@@ -11,12 +11,14 @@ import Habit from '../lib/habit';
 interface HabitEditorProps {
     initialProps: Habit; // Use the Habit class instead of an object type
     onSubmit: (data: Habit) => void;
+    buttonLabel: string; // Add a buttonLabel prop for the button text
 }
 
-const HabitEditor: React.FC<HabitEditorProps> = ({ initialProps, onSubmit }) => {
+const HabitEditor: React.FC<HabitEditorProps> = ({ initialProps, onSubmit, buttonLabel }) => {
     const [habitProps, setHabitProps] = useState(initialProps);
-
+    
     if (habitProps.date == "") setHabitProps({ ...habitProps, date: (new Date()).toLocaleDateString() });
+    if (habitProps.key == 0) setHabitProps({ ...habitProps, key: Math.floor(Math.random() * 10000000)})
 
     const [date, setDate] = useState<Date | undefined>(new Date(habitProps.date));
 
@@ -54,7 +56,7 @@ const HabitEditor: React.FC<HabitEditorProps> = ({ initialProps, onSubmit }) => 
         <>
             <Sheet>
                 <SheetTrigger asChild>
-                    <Button>Open</Button>
+                    <Button>{buttonLabel}</Button>
                 </SheetTrigger>
                 <SheetContent className="flex flex-col items-center gap-5 pt-10">
                     <SheetHeader>{initialProps.name == '' ? "New Habit" : "Edit " + initialProps.name}</SheetHeader>
@@ -66,8 +68,10 @@ const HabitEditor: React.FC<HabitEditorProps> = ({ initialProps, onSubmit }) => 
                         <label className="text-xs text-gray-500" htmlFor="description">Description</label>
                         <Textarea id="description" value={habitProps.description} onChange={updateDescription} />
                     </section>
-                    <section>
+                    <section className="flex flex-col items-center">
+                        <label className="text-s underline underline-offset-2 text-gray-500" htmlFor="startDate">Start Date</label>
                         <Calendar
+                            id="startDate"
                             selected={date}
                             onSelect={updateDate}
                             mode='single'
@@ -76,11 +80,14 @@ const HabitEditor: React.FC<HabitEditorProps> = ({ initialProps, onSubmit }) => 
 
                     {isValid() ? (
                         <SheetClose asChild>
-                            <Button variant="outline" onClick={() => onSubmit(habitProps)}>Submit</Button>
+                            <Button variant="outline" onClick={() => {
+                                onSubmit(habitProps)
+                                setHabitProps(initialProps)
+                            }}>{buttonLabel}</Button>
                         </SheetClose>
                     ) : (
                         <SheetClose asChild>
-                            <Button disabled>Submit</Button>
+                            <Button disabled>{buttonLabel}</Button>
                         </SheetClose>
                     )}
                 </SheetContent>

@@ -5,7 +5,7 @@ export default class Habit {
     date: string;
 
     static initial() {
-        return new Habit(Math.floor(Math.random() * 10000000),
+        return new Habit(0,
         "",
         "",
         (new Date()).toLocaleDateString());
@@ -16,5 +16,9 @@ export default class Habit {
         this.name = name;
         this.description = description;
         this.date = date;
+    }
+
+    static generateNewKey() {
+        return Math.floor(Math.random() * 10000000);
     }
 }
