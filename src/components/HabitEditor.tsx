@@ -56,7 +56,7 @@ const HabitEditor: React.FC<HabitEditorProps> = ({ initialProps, onSubmit, butto
         <>
             <Sheet>
                 <SheetTrigger asChild>
-                    <Button>{buttonLabel}</Button>
+                    <Button variant='ghost'>{buttonLabel}</Button>
                 </SheetTrigger>
                 <SheetContent className="flex flex-col items-center gap-5 pt-10">
                     <SheetHeader>{initialProps.name == '' ? "New Habit" : "Edit " + initialProps.name}</SheetHeader>
@@ -69,7 +69,7 @@ const HabitEditor: React.FC<HabitEditorProps> = ({ initialProps, onSubmit, butto
                         <Textarea id="description" value={habitProps.description} onChange={updateDescription} />
                     </section>
                     <section className="flex flex-col items-center">
-                        <label className="text-s underline underline-offset-2 text-gray-500" htmlFor="startDate">Start Date</label>
+                        <label className="text-s text-gray-500" htmlFor="startDate">Start Date</label>
                         <Calendar
                             id="startDate"
                             selected={date}
