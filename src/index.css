@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button-group-5 button {
+  width: 5em;
+}
  
 
 @layer base {
